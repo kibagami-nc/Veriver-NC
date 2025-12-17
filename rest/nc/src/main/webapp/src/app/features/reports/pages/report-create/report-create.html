@@ -1,0 +1,76 @@
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="px-6 py-4 border-b">
+            <h1 class="text-2xl font-bold text-gray-900">Nouveau Signalement</h1>
+        </div>
+
+        <div class="p-6">
+            <form [formGroup]="reportForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">Titre</label>
+                    <input type="text" id="title" formControlName="title"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2">
+                </div>
+
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea id="description" formControlName="description" rows="4"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="reportType" class="block text-sm font-medium text-gray-700">Type</label>
+                        <select id="reportType" formControlName="reportType"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2">
+                            <option value="WASTE">Déchets</option>
+                            <option value="CHEMICAL">Chimique</option>
+                            <option value="DEFORESTATION">Déforestation</option>
+                            <option value="OTHER">Autre</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="severity" class="block text-sm font-medium text-gray-700">Gravité</label>
+                        <select id="severity" formControlName="severity"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2">
+                            <option value="LOW">Faible</option>
+                            <option value="MEDIUM">Moyenne</option>
+                            <option value="HIGH">Élevée</option>
+                            <option value="CRITICAL">Critique</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="latitude" class="block text-sm font-medium text-gray-700">Latitude</label>
+                        <input type="number" id="latitude" formControlName="latitude"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2">
+                    </div>
+                    <div>
+                        <label for="longitude" class="block text-sm font-medium text-gray-700">Longitude</label>
+                        <input type="number" id="longitude" formControlName="longitude"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border p-2">
+                    </div>
+                </div>
+
+                <button type="button" (click)="getCurrentLocation()"
+                    class="text-sm text-indigo-600 hover:text-indigo-500">
+                    Utiliser ma position actuelle
+                </button>
+
+                <div class="flex justify-end gap-4 pt-4">
+                    <a routerLink="/reports"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                        Annuler
+                    </a>
+                    <button type="submit" [disabled]="reportForm.invalid || isLoading"
+                        class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 disabled:opacity-50">
+                        {{ isLoading ? 'Envoi...' : 'Signaler' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
