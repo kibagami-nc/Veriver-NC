@@ -1,0 +1,38 @@
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Événements</h1>
+        <a routerLink="/events/create" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-500">
+            Créer un événement
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let event of events"
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <span [class]="'px-2 py-1 text-xs font-semibold rounded-full ' + getStatusColor(event.status)">
+                        {{ event.status }}
+                    </span>
+                    <span class="text-sm text-gray-500">{{ event.eventDate | date:'shortDate' }}</span>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ event.title }}</h3>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ event.description }}</p>
+
+                <div class="flex items-center text-sm text-gray-500 mb-4">
+                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
+                    {{ event.participants.length }} / {{ event.maxParticipants }} participants
+                </div>
+
+                <a [routerLink]="['/events', event.id]"
+                    class="block w-full text-center bg-gray-50 text-indigo-600 py-2 rounded-md hover:bg-gray-100 font-medium">
+                    Voir détails
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
