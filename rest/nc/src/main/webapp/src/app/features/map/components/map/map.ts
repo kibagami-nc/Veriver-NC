@@ -25,7 +25,13 @@ export class MapComponent implements AfterViewInit {
   }
 
   private initMap(): void {
-    this.map = L.map(this.mapContainer.nativeElement).setView([-22.2711, 166.4416], 10);
+    this.map = L.map(this.mapContainer.nativeElement, {
+      zoomControl: false
+    }).setView([-22.2711, 166.4416], 10);
+
+    L.control.zoom({
+      position: 'bottomright'
+    }).addTo(this.map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

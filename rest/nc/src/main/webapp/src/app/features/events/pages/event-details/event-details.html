@@ -1,0 +1,85 @@
+<div class="container mx-auto px-4 py-8" *ngIf="event">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-indigo-600 px-6 py-4">
+            <div class="flex justify-between items-center text-white">
+                <h1 class="text-2xl font-bold">{{ event.title }}</h1>
+                <span [class]="'px-3 py-1 text-sm font-semibold rounded-full bg-white bg-opacity-20'">
+                    {{ event.status }}
+                </span>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="md:col-span-2">
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Description</h3>
+                        <p class="text-gray-600">{{ event.description }}</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Matériel nécessaire</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span *ngFor="let item of event.materialsNeeded"
+                                class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                                {{ item }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Détails</h3>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                {{ event.eventDate | date:'medium' }}
+                            </div>
+
+                            <div class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {{ event.duration }} heures
+                            </div>
+
+                            <div class="flex items-center text-gray-600">
+                                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                                {{ event.participants.length }} / {{ event.maxParticipants }} participants
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <button *ngIf="!isRegistered" (click)="register()"
+                                [disabled]="event.participants.length >= event.maxParticipants"
+                                class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                                {{ event.participants.length >= event.maxParticipants ? 'Complet' : 'Participer' }}
+                            </button>
+                            <button *ngIf="isRegistered" disabled
+                                class="w-full bg-green-600 text-white py-2 px-4 rounded-md opacity-75 cursor-default">
+                                Inscrit ✓
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t">
+                <a routerLink="/events" class="text-indigo-600 hover:text-indigo-500 font-medium">
+                    &larr; Retour aux événements
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
