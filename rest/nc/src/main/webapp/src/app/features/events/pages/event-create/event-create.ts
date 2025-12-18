@@ -64,6 +64,12 @@ export class EventCreateComponent {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         });
+      }, (error) => {
+        console.error('Error getting location', error);
+      }, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
       });
     }
   }
