@@ -26,8 +26,11 @@ export class MapComponent implements AfterViewInit {
 
   private initMap(): void {
     this.map = L.map(this.mapContainer.nativeElement, {
-      zoomControl: false
-    }).setView([-22.2711, 166.4416], 10);
+      zoomControl: false,
+      maxBounds: [[-24.0, 162.0], [-18.0, 169.0]],
+      maxBoundsViscosity: 1.0,
+      minZoom: 9
+    }).setView([-22.2711, 166.4416], 13);
 
     L.control.zoom({
       position: 'bottomright'
